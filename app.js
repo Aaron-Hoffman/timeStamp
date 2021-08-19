@@ -1,3 +1,9 @@
+const express = require('express');
+const app = express();
+
+app.get("/api/:date", function(req, res) {
+    res.json({utc: req.params.date});
+})
 //  Create json response object for any date
 
 const getDate = (input=null) => {
@@ -17,3 +23,5 @@ const getObject = (date) => {
     }
     return responseObject;
 }
+
+module.exports = app;
