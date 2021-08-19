@@ -1,11 +1,19 @@
 //  Create json response object for any date
 
-const buildDate = (input=null) => {
+const getDate = (input=null) => {
     if (input !== null) {
         const date = new Date(input);
-        console.log(date);
+        return getObject(date);
     } else {
         const date = new Date();
-        console.log(date.toString());
+        return getObject(date);
     }
+}
+
+const getObject = (date) => {
+    const responseObject = {
+        unix: date.getTime(),
+        utc: date.toUTCString()
+    }
+    return responseObject;
 }
