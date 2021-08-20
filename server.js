@@ -9,6 +9,11 @@ const myApp = require('./app');
 //  Create json response object for any date
 
 const getDate = (input=null) => {
+  // Convert to number if neccessary 
+  if (Number(input) !== NaN) {
+    input = Number(input);
+  }
+
   if (input !== null) {
       const date = new Date(input);
       if (date.toString() === 'Invalid Date') {
