@@ -6,6 +6,32 @@ var express = require('express');
 var app = express();
 const myApp = require('./app');
 
+//  Create json response object for any date
+
+const getDate = (input=null) => {
+    if (input !== null) {
+        const date = new Date(input);
+  
+        if (date !== null) {
+          return {error: 'Invalid Date'}
+        } else { 
+          return getObject(date);
+        }    
+    } else {
+        const date = new Date();
+        return getObject(date);
+    }
+}
+
+const getObject = (date) => {
+    const responseObject = {
+        unix: date.getTime(),
+        utc: date.toUTCString()
+    }
+    return responseObject;
+}
+
+
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
 var cors = require('cors');
@@ -25,13 +51,17 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-app.get("/api/bye", function (req, res) {
-  res.json({greeting: 'bye API'});
-});
+// app.get("/api/bye", function (req, res) {
+//   res.json({greeting: 'bye API'});
+// });
 
-// app.get("/api/:date", function(req, res) {
-//   res.json({utc: req.params.date});
-// })
+app.get("/api/:date", function(req, res) {
+  res.json(getDate(req.params.date));
+})
+
+app.get("/api", function(req, res) {
+  res.json(getDate());
+})
 
 app.get('/', function(req, res) {
   console.log('hello');
