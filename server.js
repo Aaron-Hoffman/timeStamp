@@ -9,18 +9,17 @@ const myApp = require('./app');
 //  Create json response object for any date
 
 const getDate = (input=null) => {
-    if (input !== null) {
-        const date = new Date(input);
-  
-        if (date !== null) {
+  if (input !== null) {
+      const date = new Date(input);
+      if (date.toString() === 'Invalid Date') {
           return {error: 'Invalid Date'}
-        } else { 
+      } else { 
           return getObject(date);
-        }    
-    } else {
-        const date = new Date();
-        return getObject(date);
-    }
+      }    
+  } else {
+      const date = new Date();
+      return getObject(date);
+  }
 }
 
 const getObject = (date) => {
