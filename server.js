@@ -4,36 +4,36 @@
 // init project
 var express = require('express');
 var app = express();
-const myApp = require('./app.js');
+// const myApp = require('./app.js');
 
 //  Create json response object for any date
 
-// const getDate = (input=null) => {
-//   // Convert to number if neccessary 
-//   if (Number(input) !== NaN) {
-//     input = Number(input);
-//   }
+const getDate = (input=null) => {
+  // Convert to number if neccessary 
+  if (Number(input) !== NaN) {
+    input = Number(input);
+  }
 
-//   if (input !== null) {
-//       const date = new Date(input);
-//       if (date.toString() === 'Invalid Date') {
-//           return {error: 'Invalid Date'}
-//       } else { 
-//           return getObject(date);
-//       }    
-//   } else {
-//       const date = new Date();
-//       return getObject(date);
-//   }
-// }
+  if (input !== null) {
+      const date = new Date(input);
+      if (date.toString() === 'Invalid Date') {
+          return {error: 'Invalid Date'}
+      } else { 
+          return getObject(date);
+      }    
+  } else {
+      const date = new Date();
+      return getObject(date);
+  }
+}
 
-// const getObject = (date) => {
-//     const responseObject = {
-//         unix: date.getTime(),
-//         utc: date.toUTCString()
-//     }
-//     return responseObject;
-// }
+const getObject = (date) => {
+    const responseObject = {
+        unix: date.getTime(),
+        utc: date.toUTCString()
+    }
+    return responseObject;
+}
 
 
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
@@ -59,13 +59,13 @@ app.get("/api/hello", function (req, res) {
 //   res.json({greeting: 'bye API'});
 // });
 
-// app.get("/api/:date", function(req, res) {
-//   res.json(getDate(req.params.date));
-// })
+app.get("/api/:date", function(req, res) {
+  res.json(getDate(req.params.date));
+})
 
-// app.get("/api", function(req, res) {
-//   res.json(getDate());
-// })
+app.get("/api", function(req, res) {
+  res.json(getDate());
+})
 
 app.get('/', function(req, res) {
   console.log('hello');
