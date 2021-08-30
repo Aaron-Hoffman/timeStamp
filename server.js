@@ -5,13 +5,13 @@
 var express = require('express');
 var app = express();
 
+const numberRegex = /^\d+$/;
 //  Create json response object for any date
-
 const getDate = (input=null) => {
   
   if (input !== null) {
     // Convert to number if neccessary 
-    if (Number(input) !== NaN) {
+    if (numberRegex.test(input)) {
       input = Number(input);
     }
     const date = new Date(input);
